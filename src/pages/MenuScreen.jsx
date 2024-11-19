@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Sidebar from '../components/Sidebar';
 import styles from '../css/MenuScreen.module.css';
 import NotasComponent from "../components/NotasComponent";
+import {AuthContext} from "../../Contexts/AuthContext";
 
 const MenuScreen = ({ navigateToChat }) => {
     const [showPopSquare, setShowPopSquare] = useState(false);
@@ -12,45 +12,88 @@ const MenuScreen = ({ navigateToChat }) => {
     const [response, setResponse] = useState('');
     const [currentNoteId, setCurrentNoteId] = useState(null);
     const [showWriteSlide, setShowWriteSlide] = useState(false);
-    const [showRedSquare, setShowRedSquare] = useState(false); // Estado para o quadrado vermelho
-    const [moveWriteSlide, setMoveWriteSlide] = useState(false); // Novo estado para mover o writeSlide
+    const [showRedSquare, setShowRedSquare] = useState(false);
+    const [moveWriteSlide, setMoveWriteSlide] = useState(false); 
+    const {auth, setAuth} = useContext (AuthContext)
+    const infoUser = auth.user
 
     const handleResponderClick = () => {
-        setMoveWriteSlide(true); // Ativa a animação para mover o writeSlide
-        setShowRedSquare(true); // Mostra o quadrado vermelho
+        setMoveWriteSlide(true); 
+        setShowRedSquare(true); 
         setShowInput(false);
     };
 
     const handleWriteClick = () => {
-        setMoveWriteSlide(false); // Reseta a animação ao escrever uma nova nota
+        setMoveWriteSlide(false); 
         setShowWriteSlide(true);
-        setShowInput(true); // Mostra o campo de entrada para escrever uma nova nota
-        setResponse(''); // Limpa o campo de resposta
-        setCurrentNoteId(null); // Reseta o ID da nota atual
-        setShowRedSquare(false); // Esconde o quadrado vermelho
+        setShowInput(true); 
+        setResponse(''); 
+        setCurrentNoteId(null); 
+        setShowRedSquare(false); 
     };
 
-    const handleIconClick = async () => {
-        setShowPopSquare(true);
-        setShowInput(false);
+  const handleIconClick = async () => {
+    setShowPopSquare(true);
+    setShowInput(false);
 
+    const conteudo = response;
+    const idNota = currentNoteId;
+
+    const json = {
+        conteudo,
+        idNota,
+        idUsuario: infoUser.id
+    };
+
+    console.log('Dados enviados para a API:', json);
+
+    try {
         if (currentNoteId) {
-            const result = await postResposta(currentNoteId);
-            if (result.success) {
+            const result = await postResposta(json);
+            console.log('Resultado da resposta:', result);
+
+            if (result.status && result.status === true) {
                 console.log('Resposta enviada com sucesso!');
+                setShowPopSquare(false); 
             } else {
-                console.log('Erro ao enviar resposta:', result.error || result.data);
+                console.log('Erro ao enviar resposta:', result.message || result.error || result.data);
             }
         } else {
-            console.log('Nova nota:', response);
-            // Aqui você pode implementar a lógica para salvar a nova nota
-        }
-    };
+            const result = await postNovaNota(json);
+            console.log('Resultado da criação da nova nota:', result);
 
-    const handleResponse = (noteId) => {
-        setCurrentNoteId(noteId);
-        handleResponderClick();
-    };
+            if (result.status && result.status === true) {
+                console.log('Nova nota criada com sucesso!');
+                setShowPopSquare(false);  
+
+                setResponse(''); 
+                setShowWriteSlide(false); 
+                setShowRedSquare(false);  
+            } else {
+                console.log('Erro ao criar nova nota:', result.message || result.error || result.data);
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao enviar dados:', error);
+    }
+};
+
+const postNovaNota = async (json) => {
+    try {
+        const response = await fetch('http://localhost:3000/v1/callme/nota', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(json),
+        });
+
+        const data = await response.json();
+        console.log('Resposta da API (nova nota):', data); 
+        return data;
+    } catch (error) {
+        console.error('Erro na criação da nova nota:', error);
+        return { success: false, error: error.message };
+    }
+};
 
     useEffect(() => {
         let timer;
@@ -64,16 +107,16 @@ const MenuScreen = ({ navigateToChat }) => {
 
     return (
         <div className={styles.menuContainer}>
-            <Sidebar navigateToChat={navigateToChat} />
+            <Sidebar selectedPageIndex={1} navigateToChat={navigateToChat} />
 
             {!showWriteSlide && (
-                <NotasComponent onRespond={handleResponse} />
+                <NotasComponent onRespond={handleResponderClick} />
             )}
 
             <div className={styles.botoes}>
                 <div className={styles.botaoContainer}>
                     <button className={styles.postar} onClick={handleWriteClick}><p>Escrever Nota</p></button>
-                    <button className={styles.responder} onClick={handleResponse}><p>Responder Nota</p></button>
+                    <button className={styles.responder} onClick={handleResponderClick}><p>Responder Nota</p></button>
                 </div>
 
                 <div className={`${styles.popSquare} ${showPopSquare ? styles.fadeIn : styles.fadeOut}`}>
@@ -86,7 +129,7 @@ const MenuScreen = ({ navigateToChat }) => {
 
             {showWriteSlide && (
                 <div className={`${styles.writeSlide} ${moveWriteSlide ? styles.moveLeft : ''}`}>
-                    <input
+                    <textarea
                         className={styles.writeInput}
                         type="text"
                         placeholder="Escreva sua nota..."
@@ -102,7 +145,7 @@ const MenuScreen = ({ navigateToChat }) => {
             )}
 
             {showRedSquare && (
-                <div className={styles.redSquare}></div> // Quadrado vermelho
+                <div className={styles.redSquare}></div>
             )}
         </div>
     );

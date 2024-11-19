@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #BBCAE7;
     height: 100vh;
 }
 
@@ -29,6 +28,8 @@
 .menuContainer .slide.active {
     opacity: 1;
 }
+
+
 
 .menuContainer button {
     position: absolute;
@@ -128,13 +129,14 @@
     border: 1px solid transparent;
     border-radius: 4px;
     font-size: xx-large;
+    display: flex;
+    flex-wrap: area;
 }
 
 .menuContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #BBCAE7;
     height: 100vh;
     position: relative;
 }
@@ -207,4 +209,8 @@
 
 .iconEnviar {
     cursor: pointer;
+}
+
+.usuario-nota{
+    width: 300px;
 }
