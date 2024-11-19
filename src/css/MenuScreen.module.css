@@ -29,8 +29,6 @@
     opacity: 1;
 }
 
-
-
 .menuContainer button {
     position: absolute;
     top: 50%;
@@ -154,8 +152,16 @@
 }
 
 .moveLeft {
-    transform: translateX(-50%); /* Move o writeSlide para a esquerda */
-    transition: transform 0.5s ease-in-out; /* Animação suave */
+    transform: translateX(-50%); 
+    transition: transform 0.5s ease-in-out; 
+}
+
+.menuContainer .inputResponder {
+    width: 100%;
+    height: 5vh;
+    background-color: #FFFFF5;
+    border-radius: 10px;
+    border-radius: 3px solid #213787;
 }
 
 .menuContainer .popUp {

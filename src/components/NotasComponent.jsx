@@ -21,14 +21,26 @@ const NotasComponent = ({ onNotasLoad, onRespond }) => {
         loadNotas();
     }, [onNotasLoad]);
 
+    useEffect(() => {
+        if (notas.length > 0) {
+            onRespond(notas[currentIndex].id);
+        }
+    }, [currentIndex, notas, onRespond]);
+
     const nextSlide = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % notas.length);
+        setCurrentIndex((prevIndex) => {
+            const newIndex = (prevIndex + 1) % notas.length;
+            console.log('ID da nota atual (próximo):', notas[newIndex]?.id);
+            return newIndex;
+        });
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? notas.length - 1 : prevIndex - 1
-        );
+        setCurrentIndex((prevIndex) => {
+            const newIndex = prevIndex === 0 ? notas.length - 1 : prevIndex - 1;
+            console.log('ID da nota atual (anterior):', notas[newIndex]?.id);
+            return newIndex;
+        });
     };
 
     const handleResponse = () => {
