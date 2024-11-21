@@ -259,3 +259,18 @@ export function validarEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
   return regex.test(email);
 }
+
+// const http = require('http');
+// const setupWebSocketServer = require('./websocketServer');
+
+// const server = http.createServer((req, res) => {
+//     res.writeHead(200, { 'Content-Type': 'text/plain' });
+//     res.end('WebSocket server is running.\n');
+// });
+
+// const wss = setupWebSocketServer(server);
+
+// const PORT = process.env.PORT || 3000;
+// server.listen(PORT, () => {
+//     console.log(`Server is listening on port ${PORT}`);
+// });

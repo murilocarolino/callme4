@@ -1,16 +1,45 @@
-import React from 'react'
-import styles from '../css/Chat.module.css'
-import Sidebar from '../components/Sidebar'
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
-const ChatScreen = () => {
-  return (
+const socket = io('http://localhost:5000');
 
-    <div className={styles.chatContainer}>
+const Chat = () => {
+    const [messages, setMessages] = useState([]);
+    const [input, setInput] = useState('');
 
-      <Sidebar />
+    useEffect(() => {
+        socket.on('receiveMessage', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+        });
 
-    </div>
-  )
-}
+        return () => {
+            socket.off('receiveMessage');
+        };
+    }, []);
 
-export default ChatScreen
+    const sendMessage = () => {
+        if (input) {
+            socket.emit('sendMessage', input);
+            setInput('');
+        }
+    };
+
+    return (
+        <div>
+            <div>
+                {messages.map((msg, index) => (
+                    <div key={index}>{msg}</div>
+                ))}
+            </div>
+            <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type a message..."
+            />
+            <button onClick={sendMessage}>Send</button>
+        </div>
+    );
+};
+
+export default Chat;

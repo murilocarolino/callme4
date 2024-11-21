@@ -23,6 +23,38 @@
         "src": "/src/img/upload.png",
         "alt": "Upload"
     },
+    "icon1":{
+        "src": "/src/img/icon1.png",
+        "alt": ""
+    },
+    "icon2":{
+        "src": "/src/img/icon2.png",
+        "alt": ""
+    },
+    "icon3":{
+        "src": "/src/img/icon3.png",
+        "alt": ""
+    },
+    "icon4":{
+        "src": "/src/img/icon4.png",
+        "alt": ""
+    },
+    "macallmePag":{
+        "src": "/src/img/macallmePag.png",
+        "alt": ""
+    },
+    "pix":{
+        "src": "/src/img/pix.png",
+        "alt": ""
+    },
+    "cartao":{
+        "src": "/src/img/cartao.png",
+        "alt": ""
+    },
+    "qrcode":{
+        "src": "/src/img/qrcode.png",
+        "alt": ""
+    },
     "nav":{
         "autoajuda":{
             "src": "./src/img/autoajuda.png",
@@ -59,5 +91,4 @@
             "alt": "Macallme segurando uma banana e sonhando"
         }
     }
-  
 }
