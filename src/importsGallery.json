@@ -55,6 +55,10 @@
         "src": "/src/img/qrcode.png",
         "alt": ""
     },
+    "user":{
+        "src": "./src/img/user.png",
+        "alt": ""
+    },
     "nav":{
         "autoajuda":{
             "src": "./src/img/autoajuda.png",

@@ -1,0 +1,35 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.testeUm {
+    width: 25%;
+    height: 100%;
+    border: 2px solid black;
+    background-color: antiquewhite;
+}
+
+.testeDois {
+    width: 50%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+.testeTres {
+    width: 25%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+.user {
+    width: 75;
+    height: 75;
+}
+
+.pai {
+    display: flex;
+    border: 2px solid black;
+    justify-content: center;
+}
