@@ -1,41 +1,47 @@
-// src/components/ChatList.jsx
-
 import React, { useEffect, useState } from 'react';
-import { fetchChats } from '../services/apiService'; // Verifique se o caminho está correto
+import api from '../services/apiService'; // Importa o serviço de API
 
-const ChatList = () => {
-    const [chats, setChats] = useState([]);
+const Chat = () => {
+    const [clients, setClients] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Função para buscar clientes
+    const fetchClients = async () => {
+        try {
+            const response = await api.get('/usuarios'); // Rota para obter todos os clientes
+            setClients(response.data); // Armazena os clientes
+        } catch (error) {
+            console.error('Failed to fetch clients:', error);
+            setError('Failed to fetch clients');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
-        const loadChats = async () => {
-            try {
-                const data = await fetchChats();
-                setChats(data.data); // Ajuste conforme a estrutura do seu JSON
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-
-        loadChats();
+        fetchClients(); // Chama a função para buscar clientes ao montar o componente
     }, []);
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
     return (
         <div>
-            <h1>Lista de Chats</h1>
-            <ul>
-                {chats.map(chat => (
-                    <li key={chat.id}>
-                        {chat.title} {/* Ajuste conforme a estrutura do seu chat */}
-                    </li>
-                ))}
-            </ul>
+            <h1>Chat</h1>
+            {loading ? (
+                <p>Loading clients...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <div>
+                    <h2>Clientes</h2>
+                    <ul>
+                        {clients.map(client => (
+                            <li key={client.id}>{client.name}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };
 
-export default ChatList;
+export default Chat;

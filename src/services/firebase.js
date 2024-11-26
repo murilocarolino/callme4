@@ -1,24 +1,20 @@
-// src/services/firebase.js
+// src/firebase.js
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
-import { getAuth } from "firebase/auth";
-
-// Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDew_PRdH-OoTxcC1M27zgwBSIHxvVDJIM",
-  authDomain: "callme-98980.firebaseapp.com",
-  databaseURL: "https://callme-98980-default-rtdb.firebaseio.com",
-  projectId: "callme-98980",
-  storageBucket: "callme-98980.firebasestorage.app",
-  messagingSenderId: "317869055760",
-  appId: "1:317869055760:web:4babaf8d7ec5aa8fa64f95"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
-// Inicializar o Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Exportar os serviços
 export { db, auth };
