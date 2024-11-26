@@ -4,7 +4,7 @@ import '/src/css/App.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";  
 import Login from '/src/pages/Login.jsx';
 import Cadastro from '/src/pages/Cadastro.jsx';
-import Chat from '/src/pages/Chat.jsx';
+import ChatList from '/src/pages/ChatList.jsx';
 import AjudaScreen from '/src/pages/Autoajuda.jsx';
 import Estatistica from '/src/pages/Estatistica.jsx'; 
 import Doacao from '/src/pages/Doacao.jsx'; 
@@ -35,7 +35,7 @@ const App = () => {
 
         {/* Private Routes (Authenticated Users Only) */}
         <Route path="/notas" element={<PrivateRoute><Notas /></PrivateRoute>} />
-        <Route path="/chat" element={<PrivateRoute><Chat /></PrivateRoute>} />
+        <Route path="/chat" element={<PrivateRoute><ChatList /></PrivateRoute>} />
         <Route path="/autoajuda" element={<PrivateRoute><AjudaScreen /></PrivateRoute>} />
         <Route path="/estatistica" element={<PrivateRoute><Estatistica /></PrivateRoute>} />
         <Route path="/doacao" element={<PrivateRoute><Doacao /></PrivateRoute>} />
