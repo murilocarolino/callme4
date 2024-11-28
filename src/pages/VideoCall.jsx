@@ -29,7 +29,7 @@ const VideoCall = () => {
             container: myMeetingRef.current,
             sharedLinks: [{
                 name: 'Copiar Link',
-                url: `http://localhost:5173/chat/room/${roomId}`
+                url: `http://localhost:5173/chat/${roomId}`
             }],
             scenario: {
                 mode: ZegoUIKitPrebuilt.OneONoneCall
