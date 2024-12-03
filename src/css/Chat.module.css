@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .barra-pesquisa {
+    margin-top: 40px;
+    margin-left: 90px;
+    width: 450px;
+    border-radius: 20px;
+    border-color: transparent;
+    
+    
+  }
+  
+  .mensagem-enviar p{
+    font-size: 18px;
+    font-weight: bolder;
+    background-color: #F07B07;
+    border-radius: 20px;
+    color: white;
+    width: 300px;
+    
+  }
+  
+  .mensagem-enviar{
+    position: fixed;
+    right: 20%;
+    text-align: center;
+    top: 420px;
+    z-index: -1;
+  }
+  
+  .mensagem-enviar img{
+    width: 150px;
+  }
+  
+  .semMsg img{
+    margin-top: 180px;
+    margin-left: 230px;
+  
+  }
+  
+  .semMsg p{
+    color: #9a999985;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+  
+  .menu-lateral {
+    width: 100px;
+    border-right: 3px solid rgba(0, 0, 0, 0.162);
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    padding-top: 300px;
+    gap: 40px;
+    box-sizing: border-box;
+  }
+  
+  .menu-lateral img {
+    width: 43px;
+    height: 43px;
+    margin-right: 8px;
+  }
+  
+  
+  .btn-voltar {
+    text-decoration: none;
+    top: 5px;
+    left: 20px;
+    position: fixed;
+    color: #000000;
+    z-index: 2;
+  }
+  
+  .conversas {
+    display: flex;
+    flex-direction: column;
+    width: 610px;
+    
+  }
+  
+  .conversa {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 40px;
+    width: 610px;
+    margin-left: 20px;
+  }
+  .area-central{
+    position: fixed;
+    width: 650px;
+    margin-left: 100px;
+    height: 100%;
+    border-right: 3px solid rgba(0, 0, 0, 0.162);
+  
+  }
+  
+  .icon-conversa {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .nome-conversa {
+    font-weight: bold;
+  }
+  
+  .mensagem-conversa {
+    color: #555;
+  }
+  
+  .hora-conversa {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  /* Estilos do Chat */
+  .lado-direito {
+    margin-left: 72vh;
+    height: 900px;
+    width: 1030px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    
+    
+  }
+  
+  .chat {
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+  
+  .chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 20px;
+  }
+  
+  .nome-pessoa-chat {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .linha-laranja {
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.096);
+   
+    width: 650px;
+    margin-top: 30px;
+  }
+  
+  .chat-conversa {
+   
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+  }
+  
+  /* Estilo das mensagens */
+  .msg-enviada {
+    display: flex;
+    justify-content: flex-end; /* Alinha as mensagens enviadas à direita */
+    margin-bottom: 10px;
+  }
+  
+  .msg-recebida {
+    display: flex;
+    justify-content: flex-start; /* Alinha as mensagens recebidas à esquerda */
+    margin-bottom: 10px;
+  }
+  
+  .foto-perfil-enviado,
+  .foto-perfil-recebido {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .mensagem-texto {
+    background-color: #e1e1e1;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 70%;
+    word-wrap: break-word;
+  }
+  
+  
+  .foto-perfil-recebido {
+    border: 2px solid #F07B07; /* Cor de borda para fotos recebidas */
+  }
+  
+  /* Estilo do input de mensagem */
+  .input-mensagem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    border-radius: 20px;
+  }
+  
+  .input-texto {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .btn-enviar-chat {
+    padding: 10px;
+    background-color: #F07B07;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-enviar-chat:hover {
+    background-color: #d76f08;
+  }
+  
+  /* Estilo das mensagens dentro do chat */
+  .chat-conversa {
+    display: flex;
+    flex-direction: column-reverse; /* Para que as mensagens mais recentes fiquem no final */
+    overflow-y: auto;
+  }
+  

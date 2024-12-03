@@ -1,5 +1,6 @@
 .ajudaScreen {
     background-color: #E3EFFF;
+    overflow: hidden;
 }
 
 .ajudaScreen h2{
@@ -133,6 +134,7 @@
     background-color: #F2F5F8;
     border: 5px #6188C5 solid;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 .detalhesContainer {
